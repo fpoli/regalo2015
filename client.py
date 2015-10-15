@@ -52,7 +52,11 @@ while not errors:
 		state["robot"]["position"]["x"],
 		state["robot"]["position"]["y"]
 	)
-	print "Memory: {0}".format(state["robot"]["memory"])
 	
+	memory = state["robot"]["memory"]
+	if memory != "":
+		print "Memory: {0}".format(state["robot"]["memory"])
+		break
+
 	# Wait
-	time.sleep(100)
+	time.sleep(0.1)
