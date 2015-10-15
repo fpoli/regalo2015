@@ -1,8 +1,16 @@
+.PHONY: server client deploy open logs
 
-.PHONY: server 
 server:
-	@node main.js
+	npm start
 
-.PHONY: client
 client:
-	@python client.py
+	python client.py
+
+deploy:
+	git push heroku master
+
+open:
+	heroku open
+
+logs:
+	heroku logs
