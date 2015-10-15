@@ -8,7 +8,7 @@ process.on("uncaughtException", function(err) {
 });
 
 String.prototype.replaceAt = function(index, character) {
-	return this.substr(0, index) + character + this.substr(index+character.length);
+	return this.substr(0, index) + character + this.substr(index + character.length);
 };
 
 function clone(a) {
@@ -114,9 +114,6 @@ function moveRobot(dx, dy) {
 
 app.set("port", (process.env.PORT || 5000));
 
-// Disable cache
-//app.disable("etag");
-
 app.use(express.static(__dirname + "/public"));
 
 // views is directory for all template files
@@ -164,6 +161,14 @@ app.get("/robot/action", function(req, res) {
 		res.send("Ok.");
 	} else
 	res.status(400).send("Aaargh! Fermati! Se continui così romperai il robot!");
+});
+
+app.get("/robot/reset", function(req, res) {
+	res.type("plain/text");
+	state.robot.position.x = 0;
+	state.robot.position.y = 0;
+	updateMapInState();
+	res.send("Ok.");
 });
 
 app.listen(app.get("port"), function() {
