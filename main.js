@@ -142,7 +142,6 @@ app.get("/robot/state", function(req, res) {
 });
 
 app.get("/robot/action", function(req, res) {
-	res.type("plain/text");
 	var action = req.query.move;
 	if (action === "up") {
 		moveRobot(0, -1); // Y goes downward
@@ -164,7 +163,6 @@ app.get("/robot/action", function(req, res) {
 });
 
 app.get("/robot/reset", function(req, res) {
-	res.type("plain/text");
 	state.robot.position.x = 0;
 	state.robot.position.y = 0;
 	updateMapInState();
