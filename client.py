@@ -1,21 +1,3 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-    	<title>Ciao Giove!</title>
-	</head>
-	<body>
-		<h1>Recupero password</h1>
-		<p>Captcha? Verifica della password? Pfff...</p>
-		<p>Noi abbiamo un <strong>robot</strong> in un <strong>labirinto</strong>, e tu ora devi guidarlo. La password è su un foglietto che è stato lasciato in uno dei corridoi.</p>
-		<p>Corri! Non hai molto tempo.</p>
-		<ul>
-			<li><a href="robot/state">Stato del robot.</a></li>
-			<li><a href="robot/action">Interfaccia di controllo del robot.</a> Da usare con il parametro GET <code>?move={up|down|left|right}</code></li>
-		</ul>
-		<p>Quando il robot passa sopra ad un foglietto lo legge e carica il testo in memoria.</p>
-		<p>Prima di morire (dopo 24 ore il computer esplode, sai...), l'ultimo sventurato stava utilizzando questo codice:</p>
-<pre>
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
@@ -74,6 +56,3 @@ while not errors:
 	
 	# Wait
 	time.sleep(100)
-</pre>
-	</body>
-</html>
