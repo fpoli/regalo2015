@@ -88,10 +88,12 @@ app.get("/recovery", function(req, res) {
 });
 
 app.get("/robot/state", function(req, res) {
-	res.json(state);
+	res.type("application/json");
+	res.send(JSON.stringify(state, null, 4));
 });
 
 app.get("/robot/action", function(req, res) {
+	res.type("plain/text");
 	var action = req.query.move;
 	if (action === "up") {
 		moveRobot(0, -1); // Y goes downward
