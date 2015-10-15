@@ -1,0 +1,10 @@
+{
+	"version": "v0.8.18",
+	"npm": false,
+	"main": "main.js",
+	"args": [],
+	"envs": {
+		"PORT": 80,
+		"DEBUG": "*"
+	}
+}
