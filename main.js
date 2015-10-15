@@ -1,7 +1,24 @@
 /* jshint node:true */
 "use strict";
 
-var logger = require("./logger")("main");
+// Generic error handler
+process.on("uncaughtException", function(err) {
+    console.error("Uncaught exception");
+    console.error(err.stack);
+});
+
+String.prototype.replaceAt = function(index, character) {
+	return this.substr(0, index) + character + this.substr(index+character.length);
+};
+
+function clone(a) {
+	return JSON.parse(JSON.stringify(a));
+}
+
+function clamp(val, min, max) {
+	return Math.max(min, Math.min(max, val));
+}
+
 var express = require("express");
 var app = express();
 
@@ -61,18 +78,16 @@ var state = {
 };
 updateMapInState();
 
-function clone(a) {
-	return JSON.parse(JSON.stringify(a));
-}
-
-function clamp(val, min, max) {
-	return Math.max(min, Math.min(max, val));
-}
-
 function updateMapInState() {
 	state.map = clone(config.map);
-	state.map.view[state.password.y][state.password.x] = "P";
-	state.map.view[state.robot.y][state.robot.x] = "R";
+
+	state.map.view[state.password.y] = 
+		state.map.view[state.password.y]
+			.replaceAt(state.password.x, "P");
+
+	state.map.view[state.robot.position.y] = 
+		state.map.view[state.robot.position.y]
+			.replaceAt(state.robot.position.x, "R");
 }
 
 function moveRobot(dx, dy) {
@@ -98,6 +113,9 @@ function moveRobot(dx, dy) {
 }
 
 app.set("port", (process.env.PORT || 5000));
+
+// Disable cache
+app.disable("etag");
 
 app.use(express.static(__dirname + "/public"));
 
