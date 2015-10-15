@@ -115,7 +115,7 @@ function moveRobot(dx, dy) {
 app.set("port", (process.env.PORT || 5000));
 
 // Disable cache
-app.disable("etag");
+//app.disable("etag");
 
 app.use(express.static(__dirname + "/public"));
 
