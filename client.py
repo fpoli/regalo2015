@@ -5,8 +5,8 @@ import requests
 import random
 import time
 
-state_url = "https://giove.herokuapp.com/robot/state"
-action_url = "https://giove.herokuapp.com/robot/action"
+state_url = "https://giove.herokuapp.com/giove/state"
+action_url = "https://giove.herokuapp.com/giove/action"
 session = requests.session()
 errors = False
 state = {}
@@ -49,13 +49,13 @@ while not errors:
 	# Read state
 	state = get_state()
 	print "Position: ({0}, {1})".format(
-		state["robot"]["position"]["x"],
-		state["robot"]["position"]["y"]
+		state["giove"]["position"]["x"],
+		state["giove"]["position"]["y"]
 	)
 	
-	memory = state["robot"]["memory"]
+	memory = state["giove"]["memory"]
 	if memory != "":
-		print "Memory: {0}".format(state["robot"]["memory"])
+		print "Memory: {0}".format(state["giove"]["memory"])
 		break
 
 	# Wait

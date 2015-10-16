@@ -68,7 +68,7 @@ var state = {
 		x: config.map.width - 1,
 		y: config.map.height - 1
 	},
-	robot: {
+	giove: {
 		position: {
 			x: 0,
 			y: 0
@@ -85,28 +85,28 @@ function updateMapInState() {
 		state.map.view[state.password.y]
 			.replaceAt(state.password.x, "P");
 
-	state.map.view[state.robot.position.y] = 
-		state.map.view[state.robot.position.y]
-			.replaceAt(state.robot.position.x, "R");
+	state.map.view[state.giove.position.y] = 
+		state.map.view[state.giove.position.y]
+			.replaceAt(state.giove.position.x, "G");
 }
 
-function moveRobot(dx, dy) {
-	var newx = state.robot.position.x + dx;
-	var newy = state.robot.position.y + dy;
+function moveGiove(dx, dy) {
+	var newx = state.giove.position.x + dx;
+	var newy = state.giove.position.y + dy;
 
 	newx = clamp(newx, 0, config.map.width-1);
 	newy = clamp(newy, 0, config.map.height-1);
 
 	if (state.map.view[newy][newx] !== "#") {
-		state.robot.position.x = newx;
-		state.robot.position.y = newy;
+		state.giove.position.x = newx;
+		state.giove.position.y = newy;
 	}
 
-	if (state.robot.position.x === state.password.x &&
-	    state.robot.position.y === state.password.y) {
-		state.robot.memory = config.password;
+	if (state.giove.position.x === state.password.x &&
+	    state.giove.position.y === state.password.y) {
+		state.giove.memory = config.password;
 	} else {
-		state.robot.memory = "";
+		state.giove.memory = "";
 	}
 
 	updateMapInState();
@@ -136,40 +136,40 @@ app.get("/recovery", function(req, res) {
 	res.render("recovery");
 });
 
-app.get("/robot/state", function(req, res) {
+app.get("/giove/state", function(req, res) {
 	res.type("application/json");
 	res.send(JSON.stringify(state, null, 4));
 });
 
-app.get("/robot/action", function(req, res) {
+app.get("/giove/action", function(req, res) {
 	var action = req.query.move;
 	if (action === "up") {
-		moveRobot(0, -1); // Y goes downward
+		moveGiove(0, -1); // Y goes downward
 		res.send("Ok.");
 	} else
 	if (action === "down") {
-		moveRobot(0, +1); // Y goes downward
+		moveGiove(0, +1); // Y goes downward
 		res.send("Ok.");
 	} else
 	if (action === "left") {
-		moveRobot(-1, 0);
+		moveGiove(-1, 0);
 		res.send("Ok.");
 	} else
 	if (action === "right") {
-		moveRobot(+1, 0);
+		moveGiove(+1, 0);
 		res.send("Ok.");
 	} else
-	res.status(400).send("Aaargh! Fermati! Se continui così romperai il robot!");
+	res.status(400).send("Aaargh! Fermati sciocco!");
 });
 
-app.get("/robot/reset", function(req, res) {
-	state.robot.position.x = 0;
-	state.robot.position.y = 0;
+app.get("/giove/reset", function(req, res) {
+	state.giove.position.x = 0;
+	state.giove.position.y = 0;
 	updateMapInState();
 	res.send("Ok.");
 });
 
-app.get("/robot/commands", function(req, res) {
+app.get("/giove/commands", function(req, res) {
 	res.render("commands");
 });
 
