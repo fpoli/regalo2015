@@ -136,12 +136,12 @@ app.get("/recovery", function(req, res) {
 	res.render("recovery");
 });
 
-app.get("/giove/state", function(req, res) {
+app.get("/garden/state", function(req, res) {
 	res.type("application/json");
 	res.send(JSON.stringify(state, null, 4));
 });
 
-app.get("/giove/action", function(req, res) {
+app.get("/garden/action", function(req, res) {
 	var action = req.query.move;
 	if (action === "up") {
 		moveGiove(0, -1); // Y goes downward
@@ -162,14 +162,14 @@ app.get("/giove/action", function(req, res) {
 	res.status(400).send("Aaargh! Fermati sciocco!");
 });
 
-app.get("/giove/reset", function(req, res) {
+app.get("/garden/reset", function(req, res) {
 	state.giove.position.x = 0;
 	state.giove.position.y = 0;
 	updateMapInState();
 	res.send("Ok.");
 });
 
-app.get("/giove/commands", function(req, res) {
+app.get("/garden/commands", function(req, res) {
 	res.render("commands");
 });
 

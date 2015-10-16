@@ -5,8 +5,8 @@ import requests
 import random
 import time
 
-state_url = "https://giove.herokuapp.com/giove/state"
-action_url = "https://giove.herokuapp.com/giove/action"
+state_url = "https://giove.herokuapp.com/garden/state"
+action_url = "https://giove.herokuapp.com/garden/action"
 session = requests.session()
 errors = False
 state = {}
